@@ -107,3 +107,69 @@ export default function App() {
 
 ```
 
+
+
+### #1.2 Getting the location
+
+- navigator.geolocation 보다 expo 방식으로 가져오는게 더 많은 기능
+
+- using location in expo (참고 : https://docs.expo.dev/versions/latest/sdk/location/)
+- expo install expo-location
+
+```js
+// App.js
+import * as Location from "expo-location";
+
+export default class extends React.Component {
+    getLocation = async() => {
+        const locatin = await Location.getCurrentPositionAsync(options);
+        console.log(location);
+
+    }
+    componentDidMount() {
+        this.getLocation();
+    }
+    render() {
+        return <Loading />
+    }
+}
+```
+
+에러 : Possible unhandled promise rejection : permission is required to do this operation
+
+사용자에게 permission을 요청해야함 
+
+### #1.3 Asking for permissions
+
+- `Location.requestPermissionsAsync` : permission이 승인되었을 때 resolve된 promise를 리턴 >> deprecated. `requestForegroundPermissionsAsync` 사용
+
+- alert 창은 안드로이드에서 다르게 보임 << "native" 하다는 것
+
+```js
+export default class extends React.Component {
+    state = {
+        isLoading: true
+    }
+    getLocation = async () => {
+        try {
+            await Location.requestForegroundPermissionsAsync();
+            const { coords: { latitude, longitude } } = await Location.getCurrentPositionAsync();
+            this.setState({ isLoading: false })
+            // send to API and get weather
+        }
+        catch (error) {
+            Alert.alert("Can't find you.", "So sad")
+        }
+
+
+    }
+    componentDidMount() {
+        this.getLocation();
+    }
+    render() {
+        const { isLoading } = this.state;
+        return isLoading ? <Loading /> : null;
+    }
+}
+```
+
