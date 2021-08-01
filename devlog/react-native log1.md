@@ -281,3 +281,14 @@ Weather.propTypes = {
     }
 ```
 
+
+
+### #2.2 Icons and Styling
+
+- expo vector icons https://docs.expo.dev/guides/icons/
+- icon browser https://icons.expo.fyi/
+
+- 여기선 MaterialCommunityIcons 선택
+- vector icon은 원하는 만큼 확대시킬 수 있다!
+
+- 코드 참고
