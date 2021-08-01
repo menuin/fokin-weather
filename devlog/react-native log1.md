@@ -245,3 +245,39 @@ render() {
 
 ### #2.1 Getting the condition names
 
+- weather condition codes : https://openweathermap.org/weather-conditions
+- Weather component에 prop으로 condition을 보낼것임
+
+```js
+// Weather.js
+Weather.propTypes = {
+    temp: PropTypes.number.isRequired,
+    condition: PropTypes.oneOf([
+        "Thunderstorm",
+        "Drizzle",
+        "Rain",
+        "Snow",
+        "Atmosphere",
+        "Clear",
+        "Clouds",
+    ]).isRequired
+}
+```
+
+- condition 정보는 weather array 내 첫번째 element 내 main에 있음
+
+```js
+// App.js
+    getWeather = async (latitude, longitude) => {
+        const {
+            data: {
+                main: { temp },
+                weather, } } = await axios.get(`...`);
+        this.setState({
+            isLoading: false,
+            condition: weather[0].main,
+            temp
+        })
+    }
+```
+
