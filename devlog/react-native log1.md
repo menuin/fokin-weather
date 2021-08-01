@@ -144,6 +144,7 @@ export default class extends React.Component {
 - `Location.requestPermissionsAsync` : permission이 승인되었을 때 resolve된 promise를 리턴 >> deprecated. `requestForegroundPermissionsAsync` 사용
 
 - alert 창은 안드로이드에서 다르게 보임 << "native" 하다는 것
+- 받아온 location  데이터에서 latitude, longitude만 빼오기
 
 ```js
 export default class extends React.Component {
@@ -170,6 +171,24 @@ export default class extends React.Component {
         const { isLoading } = this.state;
         return isLoading ? <Loading /> : null;
     }
+}
+```
+
+
+
+### #1.4 Getting the weather
+
+- weather api (https://openweathermap.org) 에서 api key 복사
+- 📌📌 api에 대한 설명 참고 (https://dev-dain.tistory.com/50)
+- getting weather by geographic coordinates(documentation 참고)
+- api로 얻은 데이터(url)를 fetch >> axios로
+
+```js
+getWeather = async (latitude, longitude) => {
+    const { data } = await axios.get(
+        `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${API_KEY}`
+    );
+    console.log(data);
 }
 ```
 
