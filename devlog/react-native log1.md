@@ -192,3 +192,56 @@ getWeather = async (latitude, longitude) => {
 }
 ```
 
+
+
+### #2.0 Displaying temperature
+
+- 단위 변경 : `http://api.openweathermap.org/....${API_KEY}&units=metric`
+
+- Weather component
+
+```js
+
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
+
+export default function Weather({ temp }) {
+    return (
+        <View style={styles.container}>
+            <Text>{temp}</Text>
+        </View>)
+}
+
+Weather.propTypes = {
+    temp: PropTypes.number.isRequired,
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    }
+})
+```
+
+- 사용하기
+
+```JS
+// App.js
+getWeather = async(latitude, longitude) => {
+    // fetching
+    this.setState({isLoading:false, temp: data.main.temp}) // 추가
+}
+...
+render() {
+    const { isLoading, temp } = this.state;
+    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)} />;
+}
+```
+
+
+
+### #2.1 Getting the condition names
+
