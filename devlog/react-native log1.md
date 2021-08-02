@@ -332,3 +332,7 @@ const weatherOptions = {
 <View style={{ ...styles.halfContainer, ...styles.textContainer }}>
 ```
 
+
+
+### #2.5 Conclusions 🎉🎉
+
