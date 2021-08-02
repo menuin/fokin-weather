@@ -287,8 +287,48 @@ Weather.propTypes = {
 
 - expo vector icons https://docs.expo.dev/guides/icons/
 - icon browser https://icons.expo.fyi/
-
 - 여기선 MaterialCommunityIcons 선택
 - vector icon은 원하는 만큼 확대시킬 수 있다!
-
 - 코드 참고
+
+
+
+### #2.3 Background Gradient
+
+- linear gradient (expo install expo-linear-gradient)
+
+```js
+const weatherOptions = {
+    Haze: {
+        iconName: "weather-hail",
+        gradient: ["#4DA0B0", "#D39D38"]
+    },
+    Clouds: {
+        iconName: "weather-cloudy",
+        gradient: ["#bdc3c7", "#2c3e50"]
+    },
+	...
+}
+
+<LinearGradient
+            colors={weatherOptions[condition].gradient}
+            style={styles.container}>
+...
+<MaterialCommunityIcons size={96} name={weatherOptions[condition].iconName} color="white" />
+```
+
+- 컬러 참고 : ui gradient https://uigradients.com/#Dawn
+
+- Status bar (아이폰 상단) : <StatusBar /> :  return 내에 아무데나 넣어줘도 css에 영향 x
+
+
+
+### #2.4 Titles and Subtitles
+
+- weatherOptions에 title, subtitle 각각 추가
+- 한 컴포넌트에 style 여러개 넣기 (ES6)
+
+```js
+<View style={{ ...styles.halfContainer, ...styles.textContainer }}>
+```
+
